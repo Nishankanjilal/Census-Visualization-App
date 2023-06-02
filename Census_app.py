@@ -4,7 +4,7 @@
 import numpy as np
 import pandas as pd
 
-@st.cache()
+#@st.cache()
 def load_data():
 	# Load the Adult Income dataset into DataFrame.
 
