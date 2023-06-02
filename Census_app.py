@@ -12,7 +12,28 @@ def load_data():
 	df.head()
 
 	# Rename the column names in the DataFrame using the list given above. 
+	df.rename(columns={i:column_name[i]},inplace=True)
 
+	# Print the first five rows of the DataFrame
+	df.head()
+
+	# Replace the invalid values ' ?' with 'np.nan'.
+
+	df['native-country'] = df['native-country'].replace(' ?',np.nan)
+	df['workclass'] = df['workclass'].replace(' ?',np.nan)
+	df['occupation'] = df['occupation'].replace(' ?',np.nan)
+
+	# Delete the rows with invalid values and the column not required 
+
+	# Delete the rows with the 'dropna()' function
+	df.dropna(inplace=True)
+
+	# Delete the column with the 'drop()' function
+	df.drop(columns='fnlwgt',axis=1,inplace=True)
+
+	return df
+
+census_df = load_data()
 
 # Configure the main page by setting its title and icon that will be displayed in a browser tab.
 # Import the streamlit Python module.
@@ -57,28 +78,7 @@ with beta3:
 # Display summary of the dataset on the click of checkbox.
 if st.checkbox('Display summary'):
   st.table(census_df.describe())
-	  df.rename(columns={i:column_name[i]},inplace=True)
 
-	# Print the first five rows of the DataFrame
-	df.head()
-
-	# Replace the invalid values ' ?' with 'np.nan'.
-
-	df['native-country'] = df['native-country'].replace(' ?',np.nan)
-	df['workclass'] = df['workclass'].replace(' ?',np.nan)
-	df['occupation'] = df['occupation'].replace(' ?',np.nan)
-
-	# Delete the rows with invalid values and the column not required 
-
-	# Delete the rows with the 'dropna()' function
-	df.dropna(inplace=True)
-
-	# Delete the column with the 'drop()' function
-	df.drop(columns='fnlwgt',axis=1,inplace=True)
-
-	return df
-
-census_df = load_data()
 
 # Configure the main page by setting its title and icon that will be displayed in a browser tab.
 # Import the streamlit Python module.
